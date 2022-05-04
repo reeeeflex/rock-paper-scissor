@@ -3,9 +3,12 @@
 - Create a function that plays a single round of rps with the user and the computer
 - User input isnt case sensitive (inlude .lower on input)
 */
+
+// global variable to store all data-selection calls in html
 const selectionButtons = document.querySelectorAll('[data-selection]');
 const computerScore = document.querySelector('[data-cpu-score]');
 const userScore = document.querySelector('[data-user-score]');
+// variable to get the results class and be able to change text in results div
 const results = document.querySelector('.results');
 const choices = [
     {
@@ -24,7 +27,7 @@ const choices = [
 ]
 
 
-//  add an onclick for choice to count as user choice
+//  add an on-click button for choice to count as user choice
 selectionButtons.forEach(selectionChoice => {
     selectionChoice.addEventListener('click', e => {
         const selectionName = selectionChoice.dataset.selection
