@@ -77,8 +77,7 @@ span {
     width: 150px;
 }
 
-.human-points,
-.cpu-points {
+.result-score {
     border: 2px solid black;
     height: 100px;
     margin: 1em;
@@ -91,7 +90,7 @@ span {
     text-align: center;
 }
 
-#results {
+.results {
     font-size: 14px;
     border: 2px solid black;
     height: 100px;
@@ -100,6 +99,7 @@ span {
     border-radius: 10%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 footer {
