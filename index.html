@@ -19,29 +19,29 @@
     </header>
     <section>
         <div class="container">
-            <button class="rock"><img
+            <button class="selection" data-selection="rock"><img
                     src="
                     https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                     alt="Rock Image">
             </button>
-            <button class="paper"><img
+            <button class="selection" data-selection="paper"><img
                     src="https://images.unsplash.com/photo-1581431886211-6b932f8367f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                     alt="Sheet of Paper"></button>
-            <button class="scissor"><img
+            <button class="selection" data-selection="scissors"><img
                     src="https://images.unsplash.com/photo-1586941962519-b1a78cf17677?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fHNjaXNzb3J8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
                     alt="Image of Scissor"></button>
         </div>
     </section>
 
     <section class="main">
-        <element>Human Points <span class="human-points"></span></element>
-        <element> Cpu Points <span class="cpu-points"></span></element>
+        <element> Human Points <span class="result-score" data-user-score>0</span></element>
+        <element> Cpu Points <span class="result-score" data-cpu-score>0</span></element>
     </section>
 
     <section class="container">
         <div class="round-result">
             <p> Results for playing...</p>
-            <p id="results"></p>
+            <div class="results"></div>
         </div>
     </section>
 
