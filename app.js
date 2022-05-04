@@ -32,18 +32,27 @@ selectionButtons.forEach(selectionChoice => {
     selectionChoice.addEventListener('click', e => {
         const selectionName = selectionChoice.dataset.selection
         const choice = choices.find(choice => choice.name === selectionName)
-        makeSelection(choice)
+        gameRound(choice)
     })
 })
 
-function makeSelection(userChoice) {
+// increments the score by 1 depending on who wins
+function incrementScore(score) {
+    score.innerText = parseInt(score.innerText) + 1
+}
+
+function gameRound(selection) {
     const computerChoice = computerRand()
     // if user is winner checks user choice first
-    const userWinner = checkWinner(userChoice, computerChoice)
+    const userWinner = checkWinner(selection, computerChoice)
     // if computer is winner checks computer choice first
-    const computerWinner = checkWinner(computerChoice, userChoice)
+    const computerWinner = checkWinner(computerChoice, selection)
     displayResult(computerWinner, userWinner)
+
+    if (userWinner) incrementScore(userScore)
+    if (computerWinner) incrementScore(computerScore)
 }
+
 
 function displayResult(computerWinner, userWinner) {
     if (computerWinner === false && userWinner === false) {
