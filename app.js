@@ -3,63 +3,61 @@
 - Create a function that plays a single round of rps with the user and the computer
 - User input isnt case sensitive (inlude .lower on input)
 */
-let playerPoints = 0, computerPoints = 0;
-const results = document.querySelector('#results');
-const humanPoints = document.querySelector('.human-points');
-const cpuPoints = document.querySelector('.cpu-points');
-const images = document.querySelectorAll('img');
-const button = document.querySelector('button');
+const selectionButtons = document.querySelectorAll('[data-selection]');
+const computerScore = document.querySelector('[data-cpu-score]');
+const userScore = document.querySelector('[data-user-score]');
+const results = document.querySelector('.results');
+const choices = [
+    {
+        name: 'rock',
+        beats: 'scissors'
+    },
+    {
+        name: 'paper',
+        beats: 'rock'
+    },
+    {
+
+        name: 'scissors',
+        beats: 'paper'
+    }
+]
 
 
+//  add an onclick for choice to count as user choice
+selectionButtons.forEach(selectionChoice => {
+    selectionChoice.addEventListener('click', e => {
+        const selectionName = selectionChoice.dataset.selection
+        const choice = choices.find(choice => choice.name === selectionName)
+        makeSelection(choice)
+    })
+})
 
-
-function computerPlay() {
-    // declare variable with all playable choices
-    const choices = ["rock", "paper", "scissors"]
-    // chooses the index of the choices array using.length
-    const randChoice = Math.floor(Math.random() * choices.length);
-    // new variable to be able to print out the random choice
-    return choices[randChoice]
+function makeSelection(userChoice) {
+    const computerChoice = computerRand()
+    // if user is winner checks user choice first
+    const userWinner = checkWinner(userChoice, computerChoice)
+    // if computer is winner checks computer choice first
+    const computerWinner = checkWinner(computerChoice, userChoice)
+    displayResult(computerWinner, userWinner)
 }
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        results.textContent = ("Looks like your tied");
-    } else if (playerSelection === "rock") {
-        if (computerSelection === "scissors") {
-            humanPoints.textContent = ++playerPoints;
-            results.textContent = (`You won, ${playerSelection} beats ${computerSelection}!`);
-        } else {
-            cpuPoints.textContent = ++computerPoints;
-            results.textContent = (`You lose, ${computerSelection} beats ${playerSelection}!`);
-        }
-    } else if (playerSelection === "scissors") {
-        if (computerSelection === "paper") {
-            humanPoints.textContent = ++playerPoints;
-            results.textContent = (`You won, ${playerSelection} beats ${computerSelection}!`);
-        } else {
-            cpuPoints.textContent = ++computerPoints;
-            results.textContent = (`You lose, ${computerSelection} beats ${playerSelection}!`);
-        }
-    } else if (playerSelection === "paper") {
-        if (computerSelection === "rock") {
-            humanPoints.textContent = ++playerPoints;
-            results.textContent = (`You won, ${playerSelection} beats ${computerSelection}!`);
-        } else {
-            cpuPoints.textContent = ++computerPoints;
-            results.textContent = (`You lose, ${computerSelection} beats ${playerSelection}!`);
-        }
+function displayResult(computerWinner, userWinner) {
+    if (computerWinner === false && userWinner === false) {
+        results.textContent = 'Its a tie'
+    } else if (userWinner === true) {
+        results.textContent = 'Congrats you won'
+    } else {
+        results.textContent = 'Computer wins, you lost'
     }
 }
 
-const test1 = "rock"
-const test2 = computerPlay();
-console.log(playRound(test1, test2));
+function computerRand() {
+    const randomIndex = Math.floor(Math.random() * choices.length)
+    return choices[randomIndex]
+}
 
-// function game() {
-
-
-//     for (let i = 0; i < 5; i++) {
-//         playRound(i)
-//     }
-// }
+// checks the object list to see if choice beats the random computer name
+function checkWinner(selection, opponentSelection) {
+    return selection.beats === opponentSelection.name
+}
